@@ -32,22 +32,12 @@ RUN wget -q https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/
 # Ports required by jetty
 EXPOSE 8080
 
-# # ======
-# # Jython
-# # ======
-
-# ARG JYTHON_VERSION=2.7.2
-# RUN wget -q https://ox.gluu.org/dist/jython/${JYTHON_VERSION}/jython-installer-${JYTHON_VERSION}.jar -O /tmp/jython-installer.jar \
-#     && mkdir -p /opt/jython \
-#     && java -jar /tmp/jython-installer.jar -v -s -d /opt/jython \
-#     && rm -f /tmp/jython-installer.jar
-
 # ====
 # SCIM
 # ====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-05-17 15:17"
+ARG GLUU_BUILD_DATE="2020-05-25 18:22"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
@@ -55,25 +45,6 @@ RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-
     && unzip -qq /tmp/scim.war -d ${JETTY_BASE}/scim/webapps/scim \
     && java -jar ${JETTY_HOME}/start.jar jetty.home=${JETTY_HOME} jetty.base=${JETTY_BASE}/scim --add-to-start=server,deploy,resources,http,http-forwarded,jsp \
     && rm -f /tmp/scim.war
-
-# # ===========
-# # Custom libs
-# # ===========
-
-# ARG TWILIO_VERSION=7.17.0
-# RUN wget -q https://repo1.maven.org/maven2/com/twilio/sdk/twilio/${TWILIO_VERSION}/twilio-${TWILIO_VERSION}.jar -O /tmp/twilio.jar
-# ARG JSMPP_VERSION=2.3.7
-# RUN wget -q https://repo1.maven.org/maven2/org/jsmpp/jsmpp/${JSMPP_VERSION}/jsmpp-${JSMPP_VERSION}.jar -O /tmp/jsmpp.jar
-
-# # ======
-# # rclone
-# # ======
-
-# ARG RCLONE_VERSION=v1.51.0
-# RUN wget -q https://github.com/rclone/rclone/releases/download/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip -O /tmp/rclone.zip \
-#     && unzip -qq /tmp/rclone.zip -d /tmp \
-#     && mv /tmp/rclone-${RCLONE_VERSION}-linux-amd64/rclone /usr/bin/ \
-#     && rm -rf /tmp/rclone-${RCLONE_VERSION}-linux-amd64 /tmp/rclone.zip
 
 # ======
 # Python
@@ -155,16 +126,6 @@ ENV GLUU_PERSISTENCE_TYPE=ldap \
 ENV GLUU_MAX_RAM_PERCENTAGE=75.0 \
     GLUU_WAIT_MAX_TIME=300 \
     GLUU_WAIT_SLEEP_DURATION=10
-    # \
-
-    # GLUU_JKS_SYNC_INTERVAL=30 \
-    # PYTHON_HOME=/opt/jython \
-    # GLUU_SYNC_CASA_MANIFESTS=false \
-    # GLUU_CASAWATCHER_INTERVAL=10 \
-    # GLUU_DOCUMENT_STORE_TYPE=LOCAL \
-    # GLUU_JCA_URL=http://localhost:8080 \
-    # GLUU_JCA_PASSWORD_FILE=/etc/gluu/conf/jca_password \
-    # GLUU_JCA_USERNAME=admin
 
 # ==========
 # misc stuff
