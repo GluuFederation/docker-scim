@@ -37,13 +37,13 @@ EXPOSE 8080
 # ====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-06-02 13:59"
+ARG GLUU_BUILD_DATE="2020-06-11 14:00"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
     && mkdir -p ${JETTY_BASE}/scim/webapps/scim \
     && unzip -qq /tmp/scim.war -d ${JETTY_BASE}/scim/webapps/scim \
-    && java -jar ${JETTY_HOME}/start.jar jetty.home=${JETTY_HOME} jetty.base=${JETTY_BASE}/scim --add-to-start=server,deploy,resources,http,http-forwarded,jsp \
+    && java -jar ${JETTY_HOME}/start.jar jetty.home=${JETTY_HOME} jetty.base=${JETTY_BASE}/scim --add-to-start=server,deploy,resources,http,http-forwarded,jsp,websocket \
     && rm -f /tmp/scim.war
 
 # ======
