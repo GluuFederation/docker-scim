@@ -17,7 +17,7 @@ RUN apk update \
 # Jetty
 # =====
 
-ARG JETTY_VERSION=9.4.24.v20191120
+ARG JETTY_VERSION=9.4.26.v20200117
 ARG JETTY_HOME=/opt/jetty
 ARG JETTY_BASE=/opt/gluu/jetty
 ARG JETTY_USER_HOME_LIB=/home/jetty/lib
@@ -37,7 +37,7 @@ EXPOSE 8080
 # ====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-06-11 14:00"
+ARG GLUU_BUILD_DATE="2020-06-18 13:56"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
