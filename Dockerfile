@@ -37,7 +37,7 @@ EXPOSE 8080
 # ====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-06-18 13:56"
+ARG GLUU_BUILD_DATE="2020-06-23 16:51"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
