@@ -32,12 +32,22 @@ RUN wget -q https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/
 # Ports required by jetty
 EXPOSE 8080
 
+# ======
+# Jython
+# ======
+
+ARG JYTHON_VERSION=2.7.2
+RUN wget -q https://ox.gluu.org/dist/jython/${JYTHON_VERSION}/jython-installer-${JYTHON_VERSION}.jar -O /tmp/jython-installer.jar \
+    && mkdir -p /opt/jython \
+    && java -jar /tmp/jython-installer.jar -v -s -d /opt/jython \
+    && rm -f /tmp/jython-installer.jar
+
 # ====
 # SCIM
 # ====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-06-23 16:51"
+ARG GLUU_BUILD_DATE="2020-06-29 00:33"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
