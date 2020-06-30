@@ -22,4 +22,5 @@ exec java \
     -Dserver.base=/opt/gluu/jetty/scim \
     -Dlog.base=/opt/gluu/jetty/scim \
     -Djava.io.tmpdir=/tmp \
+    -Dpython.home=/opt/jython \
     -jar /opt/jetty/start.jar
