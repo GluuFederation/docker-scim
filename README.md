@@ -5,7 +5,7 @@ Docker image packaging for SCIM.
 ## Versions
 
 - Stable: `gluufederation/scim:4.2.0_01`
-- Unstable: `gluufederation/scim:4.2.0_dev`
+- Unstable: `gluufederation/scim:4.2.1_dev`
 
 Refer to [Changelog](./CHANGES.md) for details on new features, bug fixes, or older releases.
 
