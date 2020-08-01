@@ -40,14 +40,14 @@ ARG JYTHON_VERSION=2.7.2
 RUN wget -q https://ox.gluu.org/dist/jython/${JYTHON_VERSION}/jython-installer-${JYTHON_VERSION}.jar -O /tmp/jython-installer.jar \
     && mkdir -p /opt/jython \
     && java -jar /tmp/jython-installer.jar -v -s -d /opt/jython \
-    && rm -f /tmp/jython-installer.jar
+    && rm -f /tmp/jython-installer.jar /tmp/*.properties
 
 # ====
 # SCIM
 # ====
 
 ARG GLUU_VERSION=4.2.1-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-07-24 12:05"
+ARG GLUU_BUILD_DATE="2020-07-28 15:20"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
@@ -61,9 +61,10 @@ RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-
 # ======
 
 RUN apk add --no-cache py3-cryptography
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt /app/requirements.txt
 RUN pip3 install -U pip wheel \
-    && pip3 install --no-cache-dir -r /tmp/requirements.txt
+    && pip3 install --no-cache-dir -r /app/requirements.txt \
+    && rm -rf /src/pygluu-containerlib/.git
 
 # =======
 # Cleanup
