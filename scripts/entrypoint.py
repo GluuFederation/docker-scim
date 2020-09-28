@@ -12,6 +12,7 @@ from pygluu.containerlib.persistence import sync_couchbase_truststore
 from pygluu.containerlib.persistence import sync_ldap_truststore
 from pygluu.containerlib.utils import cert_to_truststore
 from pygluu.containerlib.utils import get_server_certificate
+from pygluu.containerlib.utils import as_boolean
 
 manager = get_manager()
 
@@ -84,7 +85,10 @@ def main():
         render_hybrid_properties("/etc/gluu/conf/gluu-hybrid.properties")
 
     if not os.path.isfile("/etc/certs/gluu_https.crt"):
-        get_server_certificate(manager.config.get("hostname"), 443, "/etc/certs/gluu_https.crt")
+        if as_boolean(os.environ.get("GLUU_SSL_CERT_FROM_SECRETS", False)):
+            manager.secret.to_file("ssl_cert", "/etc/certs/gluu_https.crt")
+        else:
+            get_server_certificate(manager.config.get("hostname"), 443, "/etc/certs/gluu_https.crt")
 
     cert_to_truststore(
         "gluu_https",
