@@ -46,8 +46,8 @@ RUN wget -q https://ox.gluu.org/dist/jython/${JYTHON_VERSION}/jython-installer-$
 # SCIM
 # ====
 
-ENV GLUU_VERSION=4.2.1.1.Final
-ENV GLUU_BUILD_DATE="2020-10-21 12:28"
+ENV GLUU_VERSION=4.2.2-SNAPSHOT
+ENV GLUU_BUILD_DATE="2020-11-02 12:47"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
@@ -148,8 +148,8 @@ ENV GLUU_MAX_RAM_PERCENTAGE=75.0 \
 LABEL name="SCIM" \
     maintainer="Gluu Inc. <support@gluu.org>" \
     vendor="Gluu Federation" \
-    version="4.2.1" \
-    release="02" \
+    version="4.2.2" \
+    release="dev" \
     summary="Gluu SCIM" \
     description="SCIM server"
 
