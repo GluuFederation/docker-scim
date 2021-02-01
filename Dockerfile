@@ -151,7 +151,7 @@ LABEL name="SCIM" \
     maintainer="Gluu Inc. <support@gluu.org>" \
     vendor="Gluu Federation" \
     version="4.2.2" \
-    release="04" \
+    release="05" \
     summary="Gluu SCIM" \
     description="SCIM server"
 
