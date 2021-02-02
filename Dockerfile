@@ -11,13 +11,13 @@ RUN mkdir -p /usr/lib/jvm/default-jvm /usr/java/latest \
 
 RUN apk update \
     && apk add --no-cache openssl py3-pip tini curl bash \
-    && apk add --no-cache --virtual build-deps wget git
+    && apk add --no-cache --virtual build-deps wget git gcc musl-dev python3-dev libffi-dev openssl-dev
 
 # =====
 # Jetty
 # =====
 
-ARG JETTY_VERSION=9.4.26.v20200117
+ARG JETTY_VERSION=9.4.35.v20201120
 ARG JETTY_HOME=/opt/jetty
 ARG JETTY_BASE=/opt/gluu/jetty
 ARG JETTY_USER_HOME_LIB=/home/jetty/lib
@@ -46,8 +46,8 @@ RUN wget -q https://ox.gluu.org/dist/jython/${JYTHON_VERSION}/jython-installer-$
 # SCIM
 # ====
 
-ENV GLUU_VERSION=4.2.2.1.Final
-ENV GLUU_BUILD_DATE="2021-01-15 15:50"
+ENV GLUU_VERSION=4.2.3.Final
+ENV GLUU_BUILD_DATE="2021-02-02 13:10"
 
 # Install SCIM
 RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-server-${GLUU_VERSION}.war -O /tmp/scim.war \
@@ -60,7 +60,6 @@ RUN wget -q https://ox.gluu.org/maven/org/gluu/scim-server/${GLUU_VERSION}/scim-
 # Python
 # ======
 
-RUN apk add --no-cache py3-cryptography
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install -U pip wheel \
     && pip3 install --no-cache-dir -r /app/requirements.txt \
@@ -150,8 +149,8 @@ ENV GLUU_MAX_RAM_PERCENTAGE=75.0 \
 LABEL name="SCIM" \
     maintainer="Gluu Inc. <support@gluu.org>" \
     vendor="Gluu Federation" \
-    version="4.2.2" \
-    release="05" \
+    version="4.2.3" \
+    release="01" \
     summary="Gluu SCIM" \
     description="SCIM server"
 
