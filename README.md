@@ -5,7 +5,7 @@ Docker image packaging for SCIM.
 ## Versions
 
 See [Releases](https://github.com/GluuFederation/docker-scim/releases) for stable versions.
-For bleeding-edge/unstable version, use `gluufederation/scim:4.2.3_dev`.
+For bleeding-edge/unstable version, use `gluufederation/scim:4.3.0_dev`.
 
 ## Environment Variables
 
